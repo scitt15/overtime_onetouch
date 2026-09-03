@@ -23,12 +23,23 @@
     body { background-color: var(--gov-gray-bg); color: #1e293b; padding: 16px; display: flex; justify-content: center; min-height: 100vh; }
     .container { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 12px; }
 
+    /* 상단 행정 헤더 */
     .header-bar {
       background: linear-gradient(135deg, var(--gov-navy), var(--gov-dark));
-      color: #ffffff; padding: 16px 18px; border-radius: 14px; border-left: 5px solid #60a5fa;
+      color: #ffffff; padding: 18px 20px; border-radius: 14px; border-left: 5px solid #60a5fa;
     }
-    .header-title { font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-    .header-subtitle { font-size: 11px; color: #bfdbfe; margin-top: 5px; line-height: 1.4; }
+    .header-title { font-size: 19px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .privacy-notice {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-top: 10px;
+      font-size: 11px;
+      color: #e0f2fe;
+      line-height: 1.4;
+    }
+    .header-subtitle { font-size: 11px; color: #bfdbfe; margin-top: 8px; line-height: 1.4; }
 
     .card { background: var(--gov-card-bg); border-radius: 12px; padding: 14px 16px; border: 1px solid var(--gov-border); }
     .month-filter { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px dashed var(--gov-border); }
@@ -39,24 +50,26 @@
     .summary-label { font-size: 11px; color: var(--gov-slate); font-weight: 600; margin-bottom: 2px; }
     .summary-value { font-size: 22px; font-weight: 800; color: var(--gov-navy); }
 
-    /* 등록 버튼 영역 */
+    /* 모드 탭 (저녁/아침 선택) */
+    .tab-group { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: #e2e8f0; padding: 4px; border-radius: 10px; margin-bottom: 12px; }
+    .tab-btn {
+      border: none; background: none; padding: 9px; font-size: 13px; font-weight: 700; border-radius: 8px; cursor: pointer; color: #64748b; transition: all 0.2s;
+    }
+    .tab-btn.active.evening { background: var(--gov-blue); color: white; }
+    .tab-btn.active.morning { background: var(--gov-morning); color: white; }
+
+    /* 메인 등록 버튼 */
     .btn-action-main {
-      background: var(--gov-blue); color: white; border: none; border-radius: 12px; padding: 16px;
-      font-size: 16px; font-weight: 800; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%;
+      border: none; border-radius: 12px; padding: 18px; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%; color: white;
     }
     .btn-action-main:active { transform: scale(0.98); }
+    .btn-action-main.evening { background: var(--gov-blue); }
+    .btn-action-main.morning { background: var(--gov-morning); }
     .btn-sub { font-size: 11px; font-weight: normal; opacity: 0.9; }
 
-    /* 프리셋 버튼 */
-    .preset-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
-    .btn-preset {
-      background-color: #f1f5f9; border: 1px solid #cbd5e1; color: var(--gov-navy); padding: 10px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; text-align: center;
-    }
-    .btn-preset:active { background-color: #e2e8f0; }
-
     /* 수동 입력 */
-    .manual-toggle { width: 100%; text-align: center; font-size: 12px; font-weight: 600; color: var(--gov-slate); background: none; border: 1px dashed #cbd5e1; padding: 8px; border-radius: 6px; cursor: pointer; margin-top: 8px; }
-    .manual-form { display: none; background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; gap: 8px; flex-direction: column; margin-top: 6px; }
+    .manual-toggle { width: 100%; text-align: center; font-size: 12px; font-weight: 600; color: var(--gov-slate); background: none; border: 1px dashed #cbd5e1; padding: 8px; border-radius: 6px; cursor: pointer; margin-top: 10px; }
+    .manual-form { display: none; background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; gap: 8px; flex-direction: column; margin-top: 8px; }
     .manual-form.show { display: flex; }
     .input-row { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 6px; }
     .input-row input { border: 1px solid #cbd5e1; padding: 6px; border-radius: 4px; font-size: 12px; }
@@ -68,6 +81,9 @@
     .log-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center; }
     .log-date { font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 3px; }
     .log-breakdown { font-size: 11px; color: #64748b; line-height: 1.4; }
+    .log-tag { font-size: 10px; padding: 1px 5px; border-radius: 4px; font-weight: 700; }
+    .tag-mor { background: #ffedd5; color: #c2410c; }
+    .tag-eve { background: #dbeafe; color: #1d4ed8; }
     .log-recognized { font-size: 15px; font-weight: 800; color: var(--gov-blue); text-align: right; }
     .log-deduction { font-size: 10px; color: #94a3b8; text-align: right; }
     .btn-del { background: none; border: none; color: #cbd5e1; font-size: 15px; cursor: pointer; padding-left: 10px; }
@@ -82,10 +98,15 @@
   <div class="container">
     <header class="header-bar">
       <div class="header-title">🏢 공무원 초과근무 통합 관리기</div>
+      
+      <!-- 데이터 프라이버시 설명 문구 -->
+      <div class="privacy-notice">
+        🔒 <strong>안내:</strong> 본 시스템의 모든 복무 기록은 외부 서버로 전송되지 않으며, <strong>제작자를 포함한 타인이 절대 열람할 수 없습니다.</strong> 오직 본인의 기기 내부(브라우저)에만 안전하게 보관됩니다.
+      </div>
+
       <div class="header-subtitle">
-        • 정규 근무(09:00~17:00) 자동 제외<br>
-        • 당일 총 초근 실근무 시간에서 1시간(60분) 단 1회 공제<br>
-        • 저녁 초근 상한선: 21:40 자동 보정
+        • 정규시간(09:00~17:00) 자동 제외<br>
+        • 아침/저녁 상관없이 당일 총 실초근에서 1시간(60분) 단 1회 의무 공제
       </div>
     </header>
 
@@ -106,35 +127,32 @@
       </div>
     </section>
 
-    <!-- 원터치 액션 카드 -->
+    <!-- 초과근무 등록 탭 및 버튼 영역 -->
     <section class="card">
-      <button class="btn-action-main" onclick="recordCurrentTime()">
-        👉 오늘 퇴근 시각으로 즉시 등록
+      <!-- 탭 선택기 -->
+      <div class="tab-group">
+        <button id="tabEvening" class="tab-btn active evening" onclick="switchMode('evening')">🌙 저녁 초근 탭</button>
+        <button id="tabMorning" class="tab-btn" onclick="switchMode('morning')">☀️ 아침 초근 탭</button>
+      </div>
+
+      <!-- 원터치 메인 액션 버튼 -->
+      <button id="btnMainAction" class="btn-action-main evening" onclick="handleOneTouch()">
+        <span id="mainBtnTitle">👉 오늘 저녁 퇴근 등록</span>
         <span class="btn-sub" id="realtimePreview">17:00 ~ 현재 시각 기록</span>
       </button>
 
-      <!-- 자주 쓰는 프리셋 버튼 -->
-      <div class="preset-grid">
-        <button class="btn-preset" onclick="applyPreset('07:30', '18:30')">
-          07:30 ~ 18:30
-          <div style="font-size:10px; color:#64748b;">(정규외 3h → 2시간 인정)</div>
-        </button>
-        <button class="btn-preset" onclick="applyPreset('17:00', '21:40')">
-          저녁 만근 (21:40)
-          <div style="font-size:10px; color:#64748b;">(저녁 실근 4h40m → 3h40m 인정)</div>
-        </button>
-      </div>
-
       <!-- 수동 직접 입력 토글 -->
-      <button class="manual-toggle" onclick="toggleManual()">📅 출근/퇴근 시각 직접 입력 ▼</button>
+      <button class="manual-toggle" onclick="toggleManual()">📅 날짜/시간 직접 지정하기 ▼</button>
       <div class="manual-form" id="manualForm">
-        <div style="font-size:11px; color:#64748b;">* 09:00~17:00 정규시간을 포함해 전체 출·퇴근 시각을 적으시면 정규시간을 알아서 빼고 계산합니다.</div>
+        <div style="font-size:11px; color:#64748b;">
+          * 정규시간(09:00~17:00)을 포함해 실제 출근 및 퇴근 시각을 입력하면 정규시간을 자동으로 제외하고 계산합니다.
+        </div>
         <div class="input-row">
           <input type="date" id="mDate">
           <input type="time" id="mStart" value="07:30">
           <input type="time" id="mEnd" value="18:30">
         </div>
-        <button class="btn-save-manual" onclick="handleManualSave()">당일 복무 저장</button>
+        <button class="btn-save-manual" onclick="handleManualSave()">복무 기록 저장</button>
       </div>
     </section>
 
@@ -150,10 +168,12 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "gov_overtime_daily_v3";
+    const STORAGE_KEY = "gov_overtime_daily_v4";
     const REG_START = 9 * 60;   // 09:00 (540분)
     const REG_END = 17 * 60;    // 17:00 (1020분)
     const MAX_NIGHT = 21 * 60 + 40; // 21:40 (1300분)
+
+    let currentMode = "evening"; // 'evening' 또는 'morning'
 
     document.addEventListener("DOMContentLoaded", () => {
       const now = new Date();
@@ -175,74 +195,80 @@
       render();
     }
 
+    // 모드 전환 (저녁 <-> 아침)
+    function switchMode(mode) {
+      currentMode = mode;
+      const tabEve = document.getElementById("tabEvening");
+      const tabMor = document.getElementById("tabMorning");
+      const btn = document.getElementById("btnMainAction");
+      const title = document.getElementById("mainBtnTitle");
+
+      if (mode === "evening") {
+        tabEve.className = "tab-btn active evening";
+        tabMor.className = "tab-btn";
+        btn.className = "btn-action-main evening";
+        title.textContent = "👉 오늘 저녁 퇴근 등록";
+      } else {
+        tabEve.className = "tab-btn";
+        tabMor.className = "tab-btn active morning";
+        btn.className = "btn-action-main morning";
+        title.textContent = "👉 오늘 아침 출근 등록";
+      }
+      updatePreview();
+    }
+
     function updatePreview() {
       const now = new Date();
       let curMin = now.getHours() * 60 + now.getMinutes();
-      if (curMin < REG_END) {
-        document.getElementById("realtimePreview").textContent = "현재 정규근무 시간(17:00 이전)";
+      const preview = document.getElementById("realtimePreview");
+
+      if (currentMode === "evening") {
+        if (curMin < REG_END) {
+          preview.textContent = "현재 정규근무 시간 (17:00 이후 활성화)";
+        } else {
+          if (curMin > MAX_NIGHT) curMin = MAX_NIGHT;
+          const hh = String(Math.floor(curMin / 60)).padStart(2, '0');
+          const mm = String(curMin % 60).padStart(2, '0');
+          preview.textContent = `17:00 ~ ${hh}:${mm} 기록 (최대 21:40 상한)`;
+        }
       } else {
-        if (curMin > MAX_NIGHT) curMin = MAX_NIGHT;
-        const hh = String(Math.floor(curMin / 60)).padStart(2, '0');
-        const mm = String(curMin % 60).padStart(2, '0');
-        document.getElementById("realtimePreview").textContent = `17:00 ~ ${hh}:${mm} 등록 (1시간 공제)`;
+        // 아침 모드
+        if (curMin >= REG_START) {
+          preview.textContent = "현재 09:00 이후 (아침 초근 시간 경과)";
+        } else {
+          const hh = String(Math.floor(curMin / 60)).padStart(2, '0');
+          const mm = String(curMin % 60).padStart(2, '0');
+          preview.textContent = `${hh}:${mm} ~ 09:00 아침 초근 등록`;
+        }
       }
     }
 
-    // 핵심: 09:00~17:00 정규시간 제외 및 아침/저녁 초근 실근무 계산
-    function calculateSegments(startTimeStr, endTimeStr) {
-      const [sh, sm] = startTimeStr.split(":").map(Number);
-      const [eh, em] = endTimeStr.split(":").map(Number);
-      let s = sh * 60 + sm;
-      let e = eh * 60 + em;
-
-      if (e > MAX_NIGHT) e = MAX_NIGHT; // 저녁 상한 21:40 제한
-
-      let morningMin = 0;
-      let eveningMin = 0;
-
-      // 1. 아침 초과근무 (09:00 이전 구간)
-      if (s < REG_START) {
-        const morningEnd = Math.min(e, REG_START);
-        morningMin = Math.max(0, morningEnd - s);
-      }
-
-      // 2. 저녁 초과근무 (17:00 이후 구간)
-      if (e > REG_END) {
-        const eveningStart = Math.max(s, REG_END);
-        eveningMin = Math.max(0, e - eveningStart);
-      }
-
-      // 당일 총 정규근무 외 실근무 시간
-      const totalOvertimeWorked = morningMin + eveningMin;
-      // 당일 통합 1시간(60분) 단 1회 의무 공제
-      const recognizedMin = Math.max(0, totalOvertimeWorked - 60);
-
-      return { morningMin, eveningMin, totalOvertimeWorked, recognizedMin };
-    }
-
-    // 오늘 퇴근 원터치 (기본 17:00 ~ 현재시각)
-    function recordCurrentTime() {
+    // 원터치 기록 버튼 실행
+    function handleOneTouch() {
       const now = new Date();
       let curMin = now.getHours() * 60 + now.getMinutes();
-
-      if (curMin < REG_END) {
-        return alert("아직 17:00 이전입니다. 퇴근(17:00) 이후에 눌러주세요.");
-      }
-      if (curMin > MAX_NIGHT) {
-        curMin = MAX_NIGHT;
-        alert("21:40 상한으로 자동 보정되어 기록됩니다.");
-      }
-
-      const hh = String(Math.floor(curMin / 60)).padStart(2, '0');
-      const mm = String(curMin % 60).padStart(2, '0');
       const today = now.toISOString().slice(0, 10);
 
-      saveEntry(today, "17:00", `${hh}:${mm}`);
-    }
-
-    function applyPreset(start, end) {
-      const date = document.getElementById("mDate").value || new Date().toISOString().slice(0, 10);
-      saveEntry(date, start, end);
+      if (currentMode === "evening") {
+        if (curMin < REG_END) {
+          return alert("아직 17:00 이전입니다. 퇴근(17:00) 이후에 등록해 주세요.");
+        }
+        if (curMin > MAX_NIGHT) {
+          curMin = MAX_NIGHT;
+          alert("21:40 상한으로 자동 보정되어 기록됩니다.");
+        }
+        const hh = String(Math.floor(curMin / 60)).padStart(2, '0');
+        const mm = String(curMin % 60).padStart(2, '0');
+        saveSegment(today, "17:00", `${hh}:${mm}`);
+      } else {
+        // 아침 모드
+        if (curMin >= REG_START) {
+          return alert("09:00 이후에는 아침 초근을 등록할 수 없습니다. 수동 입력을 이용하세요.");
+        }
+        const hh = String(Math.floor(curMin / 60)).padStart(2, '0');
+        const mm = String(curMin % 60).padStart(2, '0');
+        saveSegment(today, `${hh}:${mm}`, "09:00");
+      }
     }
 
     function toggleManual() {
@@ -253,94 +279,133 @@
       const d = document.getElementById("mDate").value;
       const s = document.getElementById("mStart").value;
       const e = document.getElementById("mEnd").value;
-      if (!d || !s || !e) return alert("날짜, 출근, 퇴근 시각을 모두 입력하세요.");
-      saveEntry(d, s, e);
+      if (!d || !s || !e) return alert("날짜, 시작, 종료 시각을 모두 입력하세요.");
+      saveSegment(d, s, e);
       toggleManual();
     }
 
-    function saveEntry(date, start, end) {
-      const calc = calculateSegments(start, end);
+    // 시간 세그먼트 등록 및 당일 합산 정규제외/1시간 공제
+    function saveSegment(date, start, end) {
+      const [sh, sm] = start.split(":").map(Number);
+      const [eh, em] = end.split(":").map(Number);
+      let s = sh * 60 + sm;
+      let e = eh * 60 + em;
 
-      if (calc.totalOvertimeWorked === 0) {
-        return alert("초과근무 시간(09:00 이전 또는 17:00 이후)이 없습니다.");
+      if (e > MAX_NIGHT) e = MAX_NIGHT; // 21:40 컷
+      if (e <= s) return alert("종료 시각이 시작 시각보다 빠르거나 같습니다.");
+
+      let morningWorked = 0;
+      let eveningWorked = 0;
+
+      // 09:00 이전 구간 (아침)
+      if (s < REG_START) {
+        morningWorked = Math.max(0, Math.min(e, REG_START) - s);
+      }
+      // 17:00 이후 구간 (저녁)
+      if (e > REG_END) {
+        eveningWorked = Math.max(0, e - Math.max(s, REG_END));
+      }
+
+      const totalOvertimeWorked = morningWorked + eveningWorked;
+      if (totalOvertimeWorked === 0) {
+        return alert("초과근무 시간(09:00 이전 또는 17:00 이후)에 해당하는 시간이 없습니다.");
       }
 
       let logs = getLogs();
-      const existIdx = logs.findIndex(l => l.date === date);
-      if (existIdx > -1) {
-        if (!confirm(`[${date}] 기록이 이미 있습니다. 새로운 출퇴근(${start}~${end})으로 덮어쓸까요?`)) return;
-        logs.splice(existIdx, 1);
-      }
-
       logs.unshift({
         id: Date.now(),
         date,
         start,
         end,
-        morningMin: calc.morningMin,
-        eveningMin: calc.eveningMin,
-        totalWorked: calc.totalOvertimeWorked,
-        recognized: calc.recognizedMin
+        morningWorked,
+        eveningWorked,
+        totalWorked: totalOvertimeWorked
       });
 
       logs.sort((a, b) => b.date.localeCompare(a.date));
       saveLogs(logs);
 
-      const rH = Math.floor(calc.recognizedMin / 60);
-      const rM = calc.recognizedMin % 60;
-      alert(`[${date}] 등록 완료!\n• 출퇴근: ${start} ~ ${end}\n• 정규근무외 실근무: ${Math.floor(calc.totalOvertimeWorked/60)}h ${calc.totalOvertimeWorked%60}m (아침 ${calc.morningMin}분 / 저녁 ${calc.eveningMin}분)\n• 당일 1시간 공제 후 최종 인정: ${rH}시간 ${rM}분`);
+      alert(`[${date}] 기록 완료!\n• 입력 시간: ${start} ~ ${end}\n• 정규 제외 실초근: ${Math.floor(totalOvertimeWorked/60)}시간 ${totalOvertimeWorked%60}분`);
     }
 
     function deleteEntry(id) {
-      if (confirm("해당 복무 기록을 삭제하시겠습니까?")) {
+      if (confirm("해당 기록을 삭제하시겠습니까?")) {
         saveLogs(getLogs().filter(l => l.id !== id));
       }
     }
 
+    // 당일 통합 1시간 공제 렌더링 로직
     function render() {
       const targetMonth = document.getElementById("selectedMonth").value;
       const logs = getLogs().filter(l => l.date.startsWith(targetMonth));
 
-      let grandTotalMin = 0;
-      logs.forEach(l => grandTotalMin += l.recognized);
+      // 날짜별 그룹화
+      const dayMap = {};
+      logs.forEach(l => {
+        if (!dayMap[l.date]) dayMap[l.date] = { items: [], totalDayWorked: 0 };
+        dayMap[l.date].items.push(l);
+        dayMap[l.date].totalDayWorked += l.totalWorked;
+      });
 
-      const h = Math.floor(grandTotalMin / 60);
-      const m = grandTotalMin % 60;
+      let grandTotalRecognized = 0;
+      const processedDays = [];
+
+      Object.keys(dayMap).sort().reverse().forEach(date => {
+        const day = dayMap[date];
+        // 당일 통틀어 1시간(60분) 단 1회 의무 공제
+        const recognized = Math.max(0, day.totalDayWorked - 60);
+        grandTotalRecognized += recognized;
+
+        processedDays.push({
+          date,
+          items: day.items,
+          totalWorked: day.totalDayWorked,
+          recognized
+        });
+      });
+
+      const h = Math.floor(grandTotalRecognized / 60);
+      const m = grandTotalRecognized % 60;
       document.getElementById("monthlyTotalTime").textContent = `${h}시간 ${String(m).padStart(2,'0')}분`;
-      document.getElementById("workDayCount").textContent = `${logs.length}일`;
+      document.getElementById("workDayCount").textContent = `${processedDays.length}일`;
 
       const listEl = document.getElementById("logList");
       listEl.innerHTML = "";
 
-      if (logs.length === 0) {
+      if (processedDays.length === 0) {
         listEl.innerHTML = '<div style="text-align:center; padding:15px; color:#94a3b8; font-size:12px;">등록된 내역이 없습니다.</div>';
         return;
       }
 
-      logs.forEach(l => {
-        const rh = Math.floor(l.recognized / 60);
-        const rm = l.recognized % 60;
+      processedDays.forEach(day => {
+        const rh = Math.floor(day.recognized / 60);
+        const rm = day.recognized % 60;
 
-        let breakdownText = [];
-        if (l.morningMin > 0) breakdownText.push(`아침 ${Math.floor(l.morningMin/60)}h ${l.morningMin%60}m`);
-        if (l.eveningMin > 0) breakdownText.push(`저녁 ${Math.floor(l.eveningMin/60)}h ${l.eveningMin%60}m`);
+        let itemsHtml = day.items.map(item => {
+          let tags = [];
+          if (item.morningWorked > 0) tags.push(`<span class="log-tag tag-mor">아침 ${Math.floor(item.morningWorked/60)}h${item.morningWorked%60}m</span>`);
+          if (item.eveningWorked > 0) tags.push(`<span class="log-tag tag-eve">저녁 ${Math.floor(item.eveningWorked/60)}h${item.eveningWorked%60}m</span>`);
+          return `
+            <div style="font-size:11px; color:#64748b; margin-top:2px;">
+              ${item.start} ~ ${item.end} (${tags.join(' ')})
+              <button class="btn-del" onclick="deleteEntry(${item.id})">✕</button>
+            </div>
+          `;
+        }).join("");
 
         const div = document.createElement("div");
         div.className = "log-item";
         div.innerHTML = `
           <div>
-            <div class="log-date">${l.date}</div>
+            <div class="log-date">${day.date}</div>
             <div class="log-breakdown">
-              출퇴근: ${l.start} ~ ${l.end}<br>
-              실초근: ${breakdownText.join(" + ")} (총 ${Math.floor(l.totalWorked/60)}h ${l.totalWorked%60}m)
+              ${itemsHtml}
+              <div style="font-size:10px; color:#94a3b8; margin-top:2px;">당일 총 실초근: ${Math.floor(day.totalWorked/60)}h ${day.totalWorked%60}m</div>
             </div>
           </div>
-          <div style="display: flex; align-items: center;">
-            <div>
-              <div class="log-recognized">${rh}시간 ${rm}분</div>
-              <div class="log-deduction">정규제외 & 당일-1h</div>
-            </div>
-            <button class="btn-del" onclick="deleteEntry(${l.id})">✕</button>
+          <div style="display: flex; flex-direction: column; align-items: flex-end;">
+            <div class="log-recognized">${rh}시간 ${rm}분</div>
+            <div class="log-deduction">당일 -1h 공제 반영</div>
           </div>
         `;
         listEl.appendChild(div);
@@ -350,12 +415,8 @@
     function downloadCSV() {
       const logs = getLogs();
       if (logs.length === 0) return alert("기록이 없습니다.");
-      let csv = "\uFEFF근무일자,출근시각,퇴근시각,아침초근(분),저녁초근(분),총실초근(분),인정시간(분),최종인정시간\n";
-      logs.forEach(l => {
-        const h = Math.floor(l.recognized / 60);
-        const m = l.recognized % 60;
-        csv += `${l.date},${l.start},${l.end},${l.morningMin},${l.eveningMin},${l.totalWorked},${l.recognized},"${h}시간 ${m}분"\n`;
-      });
+      let csv = "\uFEFF근무일자,시작,종료,실초근(분)\n";
+      logs.forEach(l => { csv += `${l.date},${l.start},${l.end},${l.totalWorked}\n`; });
       const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
