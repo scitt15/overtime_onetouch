@@ -8,177 +8,316 @@
   <title>공무원 초과근무 복무관리기</title>
   <style>
     :root {
-      --gov-navy: #1b3a6b;
-      --gov-dark: #0f2347;
-      --gov-blue: #2563eb;
-      --gov-light-blue: #f0f5fc;
-      --gov-border: #d5e0ee;
-      --gov-slate: #475569;
-      --gov-gray-bg: #f4f6f9;
-      --gov-card-bg: #ffffff;
-      --gov-accent-red: #dc2626;
-      --gov-morning: #ea580c;
+      --bg-cream: #F2EFE9;
+      --win-header: #2B0A9E; /* 윈도우 스타일 딥 퍼플/블루 */
+      --btn-green: #00D084;
+      --btn-orange: #FF7A00;
+      --card-bg: #FFFFFF;
+      --input-border: #4A90E2;
+      --black-solid: #000000;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Malgun Gothic", sans-serif; -webkit-tap-highlight-color: transparent; }
-    body { background-color: var(--gov-gray-bg); color: #1e293b; padding: 16px; display: flex; justify-content: center; min-height: 100vh; }
-    .container { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 12px; }
 
-    /* 상단 행정 헤더 */
-    .header-bar {
-      background: linear-gradient(135deg, var(--gov-navy), var(--gov-dark));
-      color: #ffffff; padding: 18px 20px; border-radius: 14px; border-left: 5px solid #60a5fa;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "Dotum", sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
-    .header-title { font-size: 19px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-    .privacy-notice {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 8px;
-      padding: 8px 10px;
-      margin-top: 10px;
+
+    body {
+      background-color: var(--bg-cream);
+      color: #000000;
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* 공통 레트로 섀도우 컴포넌트 */
+    .retro-box {
+      background: var(--card-bg);
+      border: 2px solid var(--black-solid);
+      box-shadow: 3px 3px 0px var(--black-solid);
+      border-radius: 0px;
+      padding: 14px;
+    }
+
+    /* 윈도우 프로그램 상단 바 */
+    .retro-titlebar {
+      background: var(--win-header);
+      color: #ffffff;
+      padding: 12px 14px;
+      border: 2px solid var(--black-solid);
+      box-shadow: 4px 4px 0px var(--black-solid);
+    }
+    .retro-titlebar h1 {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .retro-titlebar p {
       font-size: 11px;
-      color: #e0f2fe;
+      color: #E2E8F0;
+      margin-top: 6px;
       line-height: 1.4;
     }
-    .header-subtitle { font-size: 11px; color: #bfdbfe; margin-top: 8px; line-height: 1.4; }
 
-    .card { background: var(--gov-card-bg); border-radius: 12px; padding: 14px 16px; border: 1px solid var(--gov-border); }
-    .month-filter { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px dashed var(--gov-border); }
-    .month-filter input { border: 1px solid var(--gov-border); background: var(--gov-light-blue); color: var(--gov-navy); font-size: 13px; font-weight: 700; padding: 4px 8px; border-radius: 6px; }
-
-    .summary-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 10px; }
-    .summary-box { background-color: var(--gov-light-blue); border: 1px solid #d0e1f9; border-radius: 8px; padding: 12px; }
-    .summary-label { font-size: 11px; color: var(--gov-slate); font-weight: 600; margin-bottom: 2px; }
-    .summary-value { font-size: 22px; font-weight: 800; color: var(--gov-navy); }
-
-    /* 모드 탭 (저녁/아침 선택) */
-    .tab-group { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: #e2e8f0; padding: 4px; border-radius: 10px; margin-bottom: 12px; }
-    .tab-btn {
-      border: none; background: none; padding: 9px; font-size: 13px; font-weight: 700; border-radius: 8px; cursor: pointer; color: #64748b; transition: all 0.2s;
+    /* 상단 요약 대시보드 */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
     }
-    .tab-btn.active.evening { background: var(--gov-blue); color: white; }
-    .tab-btn.active.morning { background: var(--gov-morning); color: white; }
+    .summary-card {
+      background: #FAFAFA;
+      border: 2px solid var(--black-solid);
+      box-shadow: 2px 2px 0px var(--black-solid);
+      padding: 10px;
+    }
+    .summary-label { font-size: 11px; font-weight: bold; color: #444; }
+    .summary-val { font-size: 21px; font-weight: 900; color: #000; margin-top: 2px; }
+
+    /* 모드 전환 탭 버튼 */
+    .tab-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .retro-tab {
+      background: #FFFFFF;
+      border: 2px solid var(--black-solid);
+      box-shadow: 2px 2px 0px var(--black-solid);
+      padding: 10px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .retro-tab:active {
+      transform: translate(2px, 2px);
+      box-shadow: 0px 0px 0px;
+    }
+    .retro-tab.active-eve {
+      background: #3B82F6;
+      color: #FFF;
+    }
+    .retro-tab.active-mor {
+      background: var(--btn-orange);
+      color: #FFF;
+    }
 
     /* 메인 등록 버튼 */
-    .btn-action-main {
-      border: none; border-radius: 12px; padding: 18px; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%; color: white;
+    .retro-btn-main {
+      width: 100%;
+      border: 2px solid var(--black-solid);
+      box-shadow: 4px 4px 0px var(--black-solid);
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.05s;
     }
-    .btn-action-main:active { transform: scale(0.98); }
-    .btn-action-main.evening { background: var(--gov-blue); }
-    .btn-action-main.morning { background: var(--gov-morning); }
-    .btn-sub { font-size: 11px; font-weight: normal; opacity: 0.9; }
+    .retro-btn-main:active {
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0px var(--black-solid);
+    }
+    .retro-btn-main.eve { background: var(--btn-green); color: #000; }
+    .retro-btn-main.mor { background: var(--btn-orange); color: #FFF; }
+    .retro-btn-sub { font-size: 11px; font-weight: normal; }
 
-    /* 수동 입력 */
-    .manual-toggle { width: 100%; text-align: center; font-size: 12px; font-weight: 600; color: var(--gov-slate); background: none; border: 1px dashed #cbd5e1; padding: 8px; border-radius: 6px; cursor: pointer; margin-top: 10px; }
-    .manual-form { display: none; background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; gap: 8px; flex-direction: column; margin-top: 8px; }
+    /* 인풋 창 스타일 (첨부 이미지의 파란 테두리 인풋) */
+    .retro-input {
+      width: 100%;
+      border: 2px solid var(--input-border);
+      outline: none;
+      padding: 8px 10px;
+      font-size: 13px;
+      font-weight: bold;
+      background: #FFF;
+    }
+
+    /* 수동 입력 폼 토글 */
+    .manual-toggle {
+      width: 100%;
+      border: 2px dashed #666;
+      background: transparent;
+      padding: 8px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .manual-form {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 10px;
+      border: 2px solid var(--black-solid);
+      background: #F8F8F8;
+    }
     .manual-form.show { display: flex; }
-    .input-row { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 6px; }
-    .input-row input { border: 1px solid #cbd5e1; padding: 6px; border-radius: 4px; font-size: 12px; }
-    .btn-save-manual { background: var(--gov-navy); color: white; border: none; padding: 9px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 12px; }
-
-    /* 복무 내역 */
-    .history-header { font-size: 13px; font-weight: 700; color: var(--gov-navy); border-left: 3px solid var(--gov-navy); padding-left: 8px; margin-bottom: 8px; }
-    .log-list { max-height: 260px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
-    .log-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center; }
-    .log-date { font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 3px; }
-    .log-breakdown { font-size: 11px; color: #64748b; line-height: 1.4; }
-    .log-tag { font-size: 10px; padding: 1px 5px; border-radius: 4px; font-weight: 700; }
-    .tag-mor { background: #ffedd5; color: #c2410c; }
-    .tag-eve { background: #dbeafe; color: #1d4ed8; }
-    .log-recognized { font-size: 15px; font-weight: 800; color: var(--gov-blue); text-align: right; }
-    .log-deduction { font-size: 10px; color: #94a3b8; text-align: right; }
-    .btn-del { background: none; border: none; color: #cbd5e1; font-size: 15px; cursor: pointer; padding-left: 10px; }
-    .btn-del:hover { color: var(--gov-accent-red); }
-
-    /* 백업 툴바 */
-    .footer-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
-    .tool-btn { background: #fff; border: 1px solid var(--gov-border); padding: 9px; border-radius: 6px; font-size: 11px; font-weight: 600; color: #334155; cursor: pointer; text-align: center; }
-
-    /* 면책 공지 문구 박스 */
-    .disclaimer-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 10px 12px;
-      font-size: 11px;
-      color: #64748b;
-      line-height: 1.5;
-      margin-top: 4px;
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 6px;
     }
-    .disclaimer-title { font-weight: 700; color: #475569; margin-bottom: 3px; display: flex; align-items: center; gap: 4px; }
+
+    /* 레트로 윈도우 스타일 버튼 */
+    .btn-sys {
+      background: #FFFFFF;
+      border: 2px solid var(--black-solid);
+      box-shadow: 3px 3px 0px var(--black-solid);
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .btn-sys:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px var(--black-solid);
+    }
+    .btn-sys.confirm { background: var(--btn-green); }
+
+    /* 로그 리스트 */
+    .log-list {
+      max-height: 250px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .log-item {
+      background: #FFF;
+      border: 2px solid var(--black-solid);
+      box-shadow: 2px 2px 0px var(--black-solid);
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .log-date { font-size: 12px; font-weight: 900; margin-bottom: 2px; }
+    .log-meta { font-size: 11px; color: #444; }
+    .tag-badge {
+      display: inline-block;
+      padding: 1px 4px;
+      border: 1px solid #000;
+      font-size: 9px;
+      font-weight: bold;
+    }
+    .tag-badge.mor { background: #FFD2A0; }
+    .tag-badge.eve { background: #BAE6FD; }
+    .log-time { font-size: 15px; font-weight: 900; text-align: right; }
+
+    /* 하단 버튼 묶음 */
+    .footer-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    /* 면책 공지 */
+    .disclaimer-box {
+      background: var(--bg-cream);
+      border: 2px solid #888;
+      padding: 10px;
+      font-size: 11px;
+      color: #555;
+      line-height: 1.4;
+    }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <header class="header-bar">
-      <div class="header-title">🏢 공무원 초과근무 통합 관리기</div>
-      
-      <div class="privacy-notice">
-        🔒 <strong>안내:</strong> 본 시스템의 복무 기록은 외부 서버로 전송되지 않으며, <strong>제작자를 포함한 타인이 절대 열람할 수 없습니다.</strong> 본인의 기기 내부(로컬)에만 안전하게 보관됩니다.
-      </div>
-
-      <div class="header-subtitle">
-        • 정규시간(09:00~17:00) 자동 제외<br>
-        • 아침/저녁 상관없이 당일 총 실초근에서 1시간(60분) 단 1회 의무 공제
-      </div>
-    </header>
-
-    <section class="card">
-      <div class="month-filter">
-        <label for="selectedMonth" style="font-size:12px; font-weight:600; color:var(--gov-slate);">조회 월</label>
-        <input type="month" id="selectedMonth">
-      </div>
-      <div class="summary-grid">
-        <div class="summary-box">
-          <div class="summary-label">당월 인정 총시간 (1h 공제)</div>
-          <div class="summary-value" id="monthlyTotalTime">0시간 00분</div>
-        </div>
-        <div class="summary-box">
-          <div class="summary-label">초근 일수</div>
-          <div class="summary-value" id="workDayCount">0일</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 원터치 액션 카드 -->
-    <section class="card">
-      <div class="tab-group">
-        <button id="tabEvening" class="tab-btn active evening" onclick="switchMode('evening')">🌙 저녁 초근 탭</button>
-        <button id="tabMorning" class="tab-btn" onclick="switchMode('morning')">☀️ 아침 초근 탭</button>
-      </div>
-
-      <button id="btnMainAction" class="btn-action-main evening" onclick="handleOneTouch()">
-        <span id="mainBtnTitle">👉 오늘 저녁 퇴근 등록</span>
-        <span class="btn-sub" id="realtimePreview">17:00 ~ 현재 시각 기록</span>
-      </button>
-
-      <button class="manual-toggle" onclick="toggleManual()">📅 날짜/시간 직접 지정하기 ▼</button>
-      <div class="manual-form" id="manualForm">
-        <div style="font-size:11px; color:#64748b;">
-          * 정규시간(09:00~17:00)을 포함해 실제 출근 및 퇴근 시각을 입력하면 정규시간을 자동으로 제외하고 계산합니다.
-        </div>
-        <div class="input-row">
-          <input type="date" id="mDate">
-          <input type="time" id="mStart" value="07:30">
-          <input type="time" id="mEnd" value="18:30">
-        </div>
-        <button class="btn-save-manual" onclick="handleManualSave()">복무 기록 저장</button>
-      </div>
-    </section>
-
-    <section class="card">
-      <div class="history-header">월별 복무 내역</div>
-      <div id="logList" class="log-list"></div>
-    </section>
-
-    <div class="footer-tools">
-      <button class="tool-btn" onclick="downloadCSV()">📑 엑셀(CSV) 저장</button>
-      <button class="tool-btn" onclick="backupJSON()">💾 전체 백업</button>
+    <!-- 상단 윈도우 바 -->
+    <div class="retro-titlebar">
+      <h1>■ 초과근무 원터치 자동 계산기</h1>
+      <p>
+        [안내] 외부 서버 전송 절대 없음 (개인 스마트폰 로컬 100% 저장)<br>
+        • 정규시간(09~17시) 자동 제외 | 당일 실초근 통합 1시간 의무 공제
+      </p>
     </div>
 
-    <!-- 법적/실무적 면책 문구 -->
-    <div class="disclaimer-card">
-      <div class="disclaimer-title">⚠️ 유의사항 및 면책 안내</div>
+    <!-- 월 선택 & 실시간 집계 카드 -->
+    <div class="retro-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <span style="font-size:12px; font-weight:bold;">조회 년월 설정:</span>
+        <input type="month" id="selectedMonth" class="retro-input" style="width: 140px; padding: 4px;">
+      </div>
+      <div class="dashboard-grid">
+        <div class="summary-card">
+          <div class="summary-label">이번 달 총 인정시간</div>
+          <div class="summary-val" id="monthlyTotalTime">0시간 00분</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">출근/초근 일수</div>
+          <div class="summary-val" id="workDayCount">0일</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 원터치 입력 영역 -->
+    <div class="retro-box">
+      <!-- 탭 선택 -->
+      <div class="tab-container">
+        <button id="tabEvening" class="retro-tab active-eve" onclick="switchMode('evening')">🌙 저녁 초근 탭</button>
+        <button id="tabMorning" class="retro-tab" onclick="switchMode('morning')">☀️ 아침 초근 탭</button>
+      </div>
+
+      <!-- 메인 원터치 버튼 -->
+      <button id="btnMainAction" class="retro-btn-main eve" onclick="handleOneTouch()">
+        <span id="mainBtnTitle">👉 오늘 저녁 퇴근 등록</span>
+        <span class="retro-btn-sub" id="realtimePreview">17:00 ~ 현재 시각 기록</span>
+      </button>
+
+      <!-- 수동 날짜/시간 입력 -->
+      <button class="manual-toggle" onclick="toggleManual()">+ 날짜/시간 직접 수동 입력</button>
+      <div class="manual-form" id="manualForm">
+        <div style="font-size:11px; color:#444;">
+          * 정규시간(09:00~17:00)을 포함해 실제 출/퇴근 시각을 적으면 정규시간을 알아서 제외합니다.
+        </div>
+        <div class="input-grid">
+          <input type="date" id="mDate" class="retro-input">
+          <input type="time" id="mStart" value="07:30" class="retro-input">
+          <input type="time" id="mEnd" value="18:30" class="retro-input">
+        </div>
+        <button class="btn-sys confirm" onclick="handleManualSave()" style="margin-top:4px;">확인 (저장)</button>
+      </div>
+    </div>
+
+    <!-- 복무 로그 리스트 -->
+    <div class="retro-box">
+      <div style="font-size: 13px; font-weight: 900; border-bottom: 2px solid #000; padding-bottom: 4px;">
+        복무 기록 리스트
+      </div>
+      <div id="logList" class="log-list"></div>
+    </div>
+
+    <!-- 하단 시스템 툴 버튼 -->
+    <div class="footer-actions">
+      <button class="btn-sys" onclick="downloadCSV()">📑 엑셀(CSV) 저장</button>
+      <button class="btn-sys" onclick="backupJSON()">💾 전체 백업 (JSON)</button>
+    </div>
+
+    <!-- 면책 문구 -->
+    <div class="disclaimer-box">
+      <strong>⚠️ 유의사항 및 면책 문구</strong><br>
       • 본 프로그램은 개인 편의를 위한 자율 참고용 계산 도구입니다.<br>
       • 실제 초과근무 인정 및 수당 지급은 e-호조/나이스 등 기관 공식 복무 시스템의 집계 결과를 따릅니다.
     </div>
@@ -220,14 +359,14 @@
       const title = document.getElementById("mainBtnTitle");
 
       if (mode === "evening") {
-        tabEve.className = "tab-btn active evening";
-        tabMor.className = "tab-btn";
-        btn.className = "btn-action-main evening";
+        tabEve.className = "retro-tab active-eve";
+        tabMor.className = "retro-tab";
+        btn.className = "retro-btn-main eve";
         title.textContent = "👉 오늘 저녁 퇴근 등록";
       } else {
-        tabEve.className = "tab-btn";
-        tabMor.className = "tab-btn active morning";
-        btn.className = "btn-action-main morning";
+        tabEve.className = "retro-tab";
+        tabMor.className = "retro-tab active-mor";
+        btn.className = "retro-btn-main mor";
         title.textContent = "👉 오늘 아침 출근 등록";
       }
       updatePreview();
@@ -240,7 +379,7 @@
 
       if (currentMode === "evening") {
         if (curMin < REG_END) {
-          preview.textContent = "현재 정규근무 시간 (17:00 이후 활성화)";
+          preview.textContent = "현재 정규근무 중 (17:00 이후 활성화)";
         } else {
           if (curMin > MAX_NIGHT) curMin = MAX_NIGHT;
           const hh = String(Math.floor(curMin / 60)).padStart(2, '0');
@@ -249,7 +388,7 @@
         }
       } else {
         if (curMin >= REG_START) {
-          preview.textContent = "현재 09:00 이후 (아침 초근 시간 경과)";
+          preview.textContent = "현재 09:00 경과 (아침 초근 마감)";
         } else {
           const hh = String(Math.floor(curMin / 60)).padStart(2, '0');
           const mm = String(curMin % 60).padStart(2, '0');
@@ -276,7 +415,7 @@
         saveSegment(today, "17:00", `${hh}:${mm}`);
       } else {
         if (curMin >= REG_START) {
-          return alert("09:00 이후에는 아침 초근을 등록할 수 없습니다. 수동 입력을 이용하세요.");
+          return alert("09:00 이후에는 아침 초근을 원터치로 등록할 수 없습니다. 수동 입력을 이용하세요.");
         }
         const hh = String(Math.floor(curMin / 60)).padStart(2, '0');
         const mm = String(curMin % 60).padStart(2, '0');
@@ -335,11 +474,11 @@
       logs.sort((a, b) => b.date.localeCompare(a.date));
       saveLogs(logs);
 
-      alert(`[${date}] 기록 완료!\n• 입력 시간: ${start} ~ ${end}\n• 실초근: ${Math.floor(totalOvertimeWorked/60)}시간 ${totalOvertimeWorked%60}분`);
+      alert(`[${date}] 저장 완료!\n• 입력 시간: ${start} ~ ${end}\n• 당일 실초근: ${Math.floor(totalOvertimeWorked/60)}시간 ${totalOvertimeWorked%60}분`);
     }
 
     function deleteEntry(id) {
-      if (confirm("해당 기록을 삭제하시겠습니까?")) {
+      if (confirm("해당 복무 기록을 삭제하시겠습니까?")) {
         saveLogs(getLogs().filter(l => l.id !== id));
       }
     }
@@ -360,7 +499,7 @@
 
       Object.keys(dayMap).sort().reverse().forEach(date => {
         const day = dayMap[date];
-        const recognized = Math.max(0, day.totalDayWorked - 60);
+        const recognized = Math.max(0, day.totalDayWorked - 60); // 1일 1회 1시간 공제
         grandTotalRecognized += recognized;
 
         processedDays.push({
@@ -380,7 +519,7 @@
       listEl.innerHTML = "";
 
       if (processedDays.length === 0) {
-        listEl.innerHTML = '<div style="text-align:center; padding:15px; color:#94a3b8; font-size:12px;">등록된 내역이 없습니다.</div>';
+        listEl.innerHTML = '<div style="text-align:center; padding:15px; color:#777; font-size:12px;">등록된 내역이 없습니다.</div>';
         return;
       }
 
@@ -390,12 +529,12 @@
 
         let itemsHtml = day.items.map(item => {
           let tags = [];
-          if (item.morningWorked > 0) tags.push(`<span class="log-tag tag-mor">아침 ${Math.floor(item.morningWorked/60)}h${item.morningWorked%60}m</span>`);
-          if (item.eveningWorked > 0) tags.push(`<span class="log-tag tag-eve">저녁 ${Math.floor(item.eveningWorked/60)}h${item.eveningWorked%60}m</span>`);
+          if (item.morningWorked > 0) tags.push(`<span class="tag-badge mor">아침 ${Math.floor(item.morningWorked/60)}h${item.morningWorked%60}m</span>`);
+          if (item.eveningWorked > 0) tags.push(`<span class="tag-badge eve">저녁 ${Math.floor(item.eveningWorked/60)}h${item.eveningWorked%60}m</span>`);
           return `
-            <div style="font-size:11px; color:#64748b; margin-top:2px;">
+            <div style="font-size:11px; margin-top:2px;">
               ${item.start} ~ ${item.end} (${tags.join(' ')})
-              <button class="btn-del" onclick="deleteEntry(${item.id})">✕</button>
+              <button onclick="deleteEntry(${item.id})" style="border:none; background:none; cursor:pointer; font-weight:bold; color:red;">[삭제]</button>
             </div>
           `;
         }).join("");
@@ -405,14 +544,14 @@
         div.innerHTML = `
           <div>
             <div class="log-date">${day.date}</div>
-            <div class="log-breakdown">
+            <div class="log-meta">
               ${itemsHtml}
-              <div style="font-size:10px; color:#94a3b8; margin-top:2px;">당일 총 실초근: ${Math.floor(day.totalWorked/60)}h ${day.totalWorked%60}m</div>
+              <div style="font-size:10px; color:#666; margin-top:2px;">당일 총 실초근: ${Math.floor(day.totalWorked/60)}h ${day.totalWorked%60}m</div>
             </div>
           </div>
           <div style="display: flex; flex-direction: column; align-items: flex-end;">
-            <div class="log-recognized">${rh}시간 ${rm}분</div>
-            <div class="log-deduction">당일 -1h 공제 반영</div>
+            <div class="log-time">${rh}시간 ${rm}분</div>
+            <div style="font-size:9px; color:#555;">당일 -1h 공제</div>
           </div>
         `;
         listEl.appendChild(div);
